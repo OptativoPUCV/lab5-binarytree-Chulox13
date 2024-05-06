@@ -62,3 +62,13 @@ Mon 06 May 2024 03:56:35 PM UTC:
  tests:  11|6
 total_score: 15/70
 9bbfc52
+Mon 06 May 2024 04:02:31 PM UTC: 
+ treemap.c | 68 +++++++++++++++++++++++++++++----------------------------------
+ 1 file changed, 31 insertions(+), 37 deletions(-)
+In file included from test.c:4:
+treemap.c:54:10: error: ‘insertTreeMap’ defined but not used [-Werror=unused-function]
+   54 |     void insertTreeMap(TreeMap *tree, void *key, void *value) {
+      |          ^~~~~~~~~~~~~
+cc1: all warnings being treated as errors
+Compilation failed
+1f2454c
