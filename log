@@ -72,3 +72,9 @@ treemap.c:54:10: error: ‘insertTreeMap’ defined but not used [-Werror=unused
 cc1: all warnings being treated as errors
 Compilation failed
 1f2454c
+Mon 06 May 2024 04:03:07 PM UTC: 
+ treemap.c | 3 ---
+ 1 file changed, 3 deletions(-)
+ tests:  12|6
+total_score: 15/70
+3851d53
