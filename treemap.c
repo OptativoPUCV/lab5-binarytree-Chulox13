@@ -7,15 +7,15 @@ typedef struct TreeNode TreeNode;
 
 
 struct TreeNode {
-    Pair* pair;
+    Pair* pair; //valor
     TreeNode * left;
     TreeNode * right;
     TreeNode * parent;
 };
 
 struct TreeMap {
-    TreeNode * root;
-    TreeNode * current;
+    TreeNode * root; //raiz
+    TreeNode * current; //nodo actual
     int (*lower_than) (void* key1, void* key2);
 };
 
@@ -36,14 +36,22 @@ TreeNode * createTreeNode(void* key, void * value) {
     return new;
 }
 
-TreeMap * createTreeMap(int (*lower_than) (void* key1, void* key2)) {
-
+TreeMap * createTreeMap(int (*lower_than) (void* key1, void* key2)) 
+{    
+    TreeMap * new = (TreeMap *)malloc(sizeof(TreeMap));
+    new->root = NULL;
+    new->current = NULL;
+    new->lower_than = lower_than;
+    
+    return new;
     //new->lower_than = lower_than;
-    return NULL;
+    
 }
 
 
-void insertTreeMap(TreeMap * tree, void* key, void * value) {
+void insertTreeMap(TreeMap * tree, void* key, void * value) 
+{
+    
 
 }
 
