@@ -238,26 +238,33 @@ Pair * searchTreeMap(TreeMap * tree, void* key)
 
 Pair * upperBound(TreeMap * tree, void* key) 
 {
-    TreeNode* current = tree->root;
-    TreeNode* upper = NULL;
+    // Handling empty tree or NULL root
+    if (tree == NULL || tree->root == NULL) {
+        return NULL; // No upper bound if tree is empty
+    }
 
+    TreeNode* current = tree->root;
+    TreeNode* upper_bound = NULL; // Initialize auxiliary pointer
+
+    // Traversing the tree
     while (current != NULL) {
         if (tree->lower_than(key, current->pair->key)) {
-            upper = current;
+            // If key is less than current node's key, go left
+            upper_bound = current; // Store potential upper bound
             current = current->left;
         } else {
+            // If key is greater than or equal to current node's key, go right
             current = current->right;
         }
     }
 
-    if (upper == NULL) {
-        return NULL; // No hay ningún nodo mayor que la clave dada
+    // Handling no upper bound found
+    if (upper_bound == NULL) {
+        return NULL; // Key is greater than all elements in the tree
     } else {
-        tree->current = upper;
-        return upper->pair;
+        tree->current = upper_bound; // Update current node
+        return upper_bound->pair; // Return the pair of the upper bound
     }
-
-
 }
 
 Pair * firstTreeMap(TreeMap * tree)
