@@ -93,6 +93,7 @@ void insertTreeMap(TreeMap * tree, void* key, void * value)
             else
             {
                 temp->pair->value = value;
+                temp->pair->key = key;
                 free(newNode);
                 break;
             }
