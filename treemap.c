@@ -238,27 +238,27 @@ Pair * searchTreeMap(TreeMap * tree, void* key)
 
 Pair * upperBound(TreeMap * tree, void* key) 
 {
-    TreeNode* current = tree->root;
-    TreeNode* upper = NULL;
+    Pair * upperBound(TreeMap * tree, void* key) {
+        TreeNode* current = tree->root;
+        TreeNode* upper = NULL;
 
-    while (current != NULL) {
-        if (tree->lower_than(key, current->pair->key)) {
-            upper = current;
-            current = current->left;
-        } else if (tree->lower_than(current->pair->key, key)) {
-            current = current->right;
+        while (current != NULL) {
+            if (tree->lower_than(key, current->pair->key)) {
+                upper = current;
+                current = current->left;
+            } else {
+                current = current->right;
+            }
+        }
+
+        if (upper == NULL) {
+            return NULL; // No hay ningún nodo mayor que la clave dada
         } else {
-            // Encontró una clave igual, se mueve hacia la derecha para encontrar el primer mayor
-            current = current->right;
+            tree->current = upper;
+            return upper->pair;
         }
     }
 
-    if (upper == NULL) {
-        return NULL; // No hay ningún nodo mayor o igual que la clave dada
-    } else {
-        tree->current = upper;
-        return upper->pair;
-    }
 
 }
 
