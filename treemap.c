@@ -61,7 +61,7 @@ void insertTreeMap(TreeMap * tree, void* key, void * value)
     if (newNode == NULL)
         return;
     //newNode->pair->key = key;
-    newNode->pair->value = value;
+    //newNode->pair->value = value;
     newNode->left = NULL;
     newNode->right = NULL;
 
