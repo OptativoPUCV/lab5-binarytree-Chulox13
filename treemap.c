@@ -57,56 +57,46 @@ TreeMap * createTreeMap(int (*lower_than) (void* key1, void* key2))
 
 void insertTreeMap(TreeMap * tree, void* key, void * value) 
 {
-    TreeNode* newNode = malloc(sizeof(TreeNode));
-    if (newNode == NULL)
+    TreeNode * newNode = createTreeNode(key, value);
+    if (newNode == NULL) {
+        // Memory allocation failed
         return;
-    newNode->pair->key = key;
-    newNode->pair->value = value;
-    newNode->left = NULL;
-    newNode->right = NULL;
+    }
 
-    if (tree->root == NULL)
+    if (tree->root == NULL) {
+        // If the tree is empty, make the new node the root
         tree->root = newNode;
-    else
-    {
-        TreeNode* temp = tree->root;
+        return;
+    }
 
-        while(1)
-        {
-            if (tree->lower_than(key, temp->pair->key))
-            {
-                if (temp->left == NULL)
-                {
-                    temp->left = newNode;
-                    break;
-                }
-                else
-                {
-                    temp = temp->left;    
-                }
-                    
-            }
-            else if (tree->lower_than(temp->pair->key, key))
-            {
-                if (temp->right == NULL)
-                {
-                    temp->right = newNode;
-                    break;
-                }
-                else 
-                {
-                    temp = temp->right;
-                }
-            }
-            else
-            {
-                temp->pair->value = value;
+    TreeNode * current = tree->root;
+    TreeNode * parent = NULL;
 
-                free(newNode);
-                break;
-            }
+    // Traverse the tree to find the appropriate position for the new node
+    while (current != NULL) {
+        parent = current;
+        if (tree->lower_than(key, current->pair->key)) {
+            // If key is less than current node's key, go left
+            current = current->left;
+        } else if (tree->lower_than(current->pair->key, key)) {
+            // If key is greater than current node's key, go right
+            current = current->right;
+        } else {
+            // If key already exists, update the value and return
+            current->pair->value = value;
+            free(newNode->pair); // Free the Pair struct of newNode
+            free(newNode);       // Free the newNode itself
+            return;
         }
-    }    
+    }
+
+    // Attach the new node to the tree
+    newNode->parent = parent;
+    if (tree->lower_than(key, parent->pair->key)) {
+        parent->left = newNode;
+    } else {
+        parent->right = newNode;
+    }
 }
 
 TreeNode * minimum(TreeNode * x){
