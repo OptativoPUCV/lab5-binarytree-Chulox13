@@ -329,3 +329,9 @@ treemap.c:258:12: error: ‘nextTreeMap’ defined but not used [-Werror=unused-
 cc1: all warnings being treated as errors
 Compilation failed
 25e80a1
+Wed 08 May 2024 08:34:52 PM UTC: 
+ treemap.c | 2 --
+ 1 file changed, 2 deletions(-)
+ tests:  22|2
+total_score: 50/70
+f02034f
