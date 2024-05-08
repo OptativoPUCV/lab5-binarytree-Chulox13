@@ -245,7 +245,7 @@ Pair * upperBound(TreeMap * tree, void* key)
 
     while (current != NULL)
         {
-            if (tree->lower_than(key,current->pair->key) == 1)
+            if (tree->lower_than(key,current->pair->key))
             {
                 current = current->left;
             }
@@ -256,12 +256,14 @@ Pair * upperBound(TreeMap * tree, void* key)
             }
         }
 
-    if (upper == NULL) return NULL;
+    if (upper == NULL) 
+        return NULL;
     else 
     {
         tree->current = upper;
         return upper->pair;
     }
+    
     
 
 }
