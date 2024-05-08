@@ -92,12 +92,14 @@ void insertTreeMap(TreeMap * tree, void* key, void * value)
         }
     }
 
-    // Attach the new node to the tree
+    // Adjunta el nuevo nodo al árbol
     newNode->parent = parent;
     if (tree->lower_than(key, parent->pair->key)) {
         parent->left = newNode;
+        tree->current = newNode;
     } else {
         parent->right = newNode;
+        tree->current = newNode;
     }
 }
 
