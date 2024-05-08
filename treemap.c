@@ -240,7 +240,28 @@ Pair * searchTreeMap(TreeMap * tree, void* key)
 
 Pair * upperBound(TreeMap * tree, void* key) 
 {
-    
+    TreeNode* current = tree->root;
+    TreeNode* upper = NULL;
+
+    while (current != NULL)
+        {
+            if (tree->lower_than(key,current->pair->key) == 1)
+            {
+                current = current->left;
+            }
+            else 
+            {
+                upper = current;
+                current = current->right;
+            }
+        }
+
+    if (upper == NULL) return NULL;
+    else 
+    {
+        tree->current = upper;
+        return upper->pair;
+    }
     
     return NULL;
 }
@@ -256,32 +277,27 @@ Pair * firstTreeMap(TreeMap * tree)
 Pair * nextTreeMap(TreeMap * tree) 
 {
     if (tree == NULL || tree->root == NULL || tree->current == NULL) {
-        return NULL; // Empty tree, no root, or no current element
+        return NULL; 
     }
-    // Strategy:
-    // 1. Check if the current element has a right child:
-    //    - If yes, find the minimum element in the right subtree and return it.
-    // 2. If the current element doesn't have a right child:
-    //    - Traverse upwards from the current element to its parent and grandparent nodes.
-    //    - Find the first parent where the current element is the left child.
-    //    - If found, return the parent's pair.
-    //    - If not found (reached the root and current element is still right child), return NULL.
     TreeNode* current = tree->current;
-    // Case 1: Current element has a right child
-    if (current->right != NULL) {
+    
+    if (current->right != NULL) 
+    {
         return minimum(current->right)->pair;
     }
-    // Case 2: Current element doesn't have a right child
+    
     TreeNode* parent = current->parent;
-    while (parent != NULL && current == parent->right) {
+    while (parent != NULL && current == parent->right) 
+    {
         current = parent;
         parent = parent->parent;
     }
-    // If parent is NULL, means we reached the root and current is still right child - no next element
-    if (parent == NULL) {
+
+    if (parent == NULL) 
+    {
         return NULL;
     }
-    // Return the parent's pair
+    
     tree->current = parent;
     return parent->pair;
 }
