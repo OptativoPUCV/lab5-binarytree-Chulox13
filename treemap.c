@@ -77,19 +77,9 @@ void insertTreeMap(TreeMap * tree, void* key, void * value)
         parent = current;
         if (tree->lower_than(key, current->pair->key)) {
             // If key is less than current node's key, go left
-            if (current->left == NULL) {
-                current->left = newNode;
-                newNode->parent = current;
-                return;
-            }
             current = current->left;
         } else if (tree->lower_than(current->pair->key, key)) {
             // If key is greater than current node's key, go right
-            if (current->right == NULL) {
-                current->right = newNode;
-                newNode->parent = current;
-                return;
-            }
             current = current->right;
         } else {
             // If key already exists, update the value and return
@@ -98,6 +88,14 @@ void insertTreeMap(TreeMap * tree, void* key, void * value)
             free(newNode);       // Free the newNode itself
             return;
         }
+    }
+
+    // Attach the new node to the tree
+    newNode->parent = parent;
+    if (tree->lower_than(key, parent->pair->key)) {
+        parent->left = newNode;
+    } else {
+        parent->right = newNode;
     }
 }
 
