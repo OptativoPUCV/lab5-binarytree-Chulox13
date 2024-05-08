@@ -314,3 +314,18 @@ Wed 08 May 2024 08:27:44 PM UTC:
  tests:  20|2
 total_score: 45/70
 797f376
+Wed 08 May 2024 08:34:33 PM UTC: 
+ treemap.c | 45 +++++++++++++++++++++++++++++----------------
+ 1 file changed, 29 insertions(+), 16 deletions(-)
+In file included from test.c:4:
+treemap.c: In function ‘nextTreeMap’:
+treemap.c:295:1: error: control reaches end of non-void function [-Werror=return-type]
+  295 | }
+      | ^
+At top level:
+treemap.c:258:12: error: ‘nextTreeMap’ defined but not used [-Werror=unused-function]
+  258 |     Pair * nextTreeMap(TreeMap * tree) {
+      |            ^~~~~~~~~~~
+cc1: all warnings being treated as errors
+Compilation failed
+25e80a1
