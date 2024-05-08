@@ -60,7 +60,7 @@ void insertTreeMap(TreeMap * tree, void* key, void * value)
     TreeNode* newNode = malloc(sizeof(TreeNode));
     if (newNode == NULL)
         return;
-    newNode->pair->key = key;
+    //newNode->pair->key = key;
     newNode->pair->value = value;
     newNode->left = NULL;
     newNode->right = NULL;
