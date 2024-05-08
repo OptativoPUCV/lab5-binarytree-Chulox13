@@ -238,11 +238,21 @@ Pair * searchTreeMap(TreeMap * tree, void* key)
 }
 
 
-Pair * upperBound(TreeMap * tree, void* key) {
-    return NULL;
+Pair * upperBound(TreeMap * tree, void* key) 
+{
+    if (tree == NULL || tree->root == NULL) return NULL;
+    
+    //return NULL;
 }
 
-Pair * firstTreeMap(TreeMap * tree) {
+Pair * firstTreeMap(TreeMap * tree)
+{
+    if (tree == NULL || tree->root == NULL) return NULL;
+    TreeNode * aux = minimum(tree->root);
+    tree->current = aux;
+    
+    
+    
     return NULL;
 }
 
