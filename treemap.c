@@ -51,48 +51,53 @@ TreeMap * createTreeMap(int (*lower_than) (void* key1, void* key2))
 
 void insertTreeMap(TreeMap * tree, void* key, void * value) 
 {
-    if (tree == NULL)
-        return;
+    TreeNode* newNode = malloc(sizeof(TreeNode));
+    newNode->pair->key = key;
+    newNode->pair->value = value;
+    newNode->left = NULL;
+    newNode->right = NULL;
 
-    TreeNode *newNode = createTreeNode(key, value);
-    if (newNode == NULL)
-        return; // Error al crear el nodo
-
-    if (tree->root == NULL) {
-        // Árbol vacío, el nuevo nodo se convierte en la raíz
+    if (tree->root == NULL)
         tree->root = newNode;
-        return;
-    }
+    else
+    {
+        TreeNode* temp = tree->root;
 
-    TreeNode *currentNode = tree->root;
-    TreeNode *parent = NULL;
-
-    while (currentNode != NULL) {
-        parent = currentNode;
-        if (tree->lower_than(key, currentNode->pair->key)) {
-            // Si la clave es menor, ve a la izquierda
-            currentNode = currentNode->left;
-        } else if (tree->lower_than(currentNode->pair->key, key)) {
-            // Si la clave es mayor, ve a la derecha
-            currentNode = currentNode->right;
-        } else {
-            // Clave ya existe, actualiza el valor
-            currentNode->pair->value = value;
-            free(newNode); // Liberar el nodo creado
-            return;
+        while(1)
+        {
+            if (key < temp->pair->key)
+            {
+                if (temp->left == NULL)
+                {
+                    temp->left = newNode;
+                    break;
+                }
+                else
+                {
+                    temp = temp->left;    
+                }
+                    
+            }
+            else if (key > temp->pair->key)
+            {
+                if (temp->right == NULL)
+                {
+                    temp->right = newNode;
+                    break;
+                }
+                else 
+                {
+                    temp = temp->right;
+                }
+            }
+            else
+            {
+                temp->pair->value = value;
+                free(newNode);
+                break;
+            }
         }
-    }
-
-    // Insertar el nuevo nodo
-    newNode->parent = parent;
-    if (tree->lower_than(key, parent->pair->key)) {
-        parent->left = newNode;
-    } else {
-        parent->right = newNode;
-    }
-    
-    
-
+    }    
 }
 
 TreeNode * minimum(TreeNode * x){
