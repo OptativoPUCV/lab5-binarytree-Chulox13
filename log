@@ -205,3 +205,14 @@ treemap.c:77:9: error: ‘parent’ undeclared (first use in this function)
 treemap.c:77:9: note: each undeclared identifier is reported only once for each function it appears in
 Compilation failed
 baf74d5
+Wed 08 May 2024 11:28:38 AM UTC: 
+ treemap.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+In file included from test.c:4:
+treemap.c: In function ‘insertTreeMap’:
+treemap.c:73:16: error: variable ‘parent’ set but not used [-Werror=unused-but-set-variable]
+   73 |     TreeNode * parent = NULL;
+      |                ^~~~~~
+cc1: all warnings being treated as errors
+Compilation failed
+1260503
