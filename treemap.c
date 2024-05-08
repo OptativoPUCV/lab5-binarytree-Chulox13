@@ -70,7 +70,7 @@ void insertTreeMap(TreeMap * tree, void* key, void * value)
     }
 
     TreeNode * current = tree->root;
-    TreeNode * parent = NULL;
+    TreeNode * parent;
 
     // Traverse the tree to find the appropriate position for the new node
     while (current != NULL) {
