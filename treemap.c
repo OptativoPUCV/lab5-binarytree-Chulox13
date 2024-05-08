@@ -109,11 +109,98 @@ TreeNode * minimum(TreeNode * x)
         x = x->left;
     return x;
 
-    
 }
 
 
-void removeNode(TreeMap * tree, TreeNode* node) {
+void removeNode(TreeMap * tree, TreeNode* node)
+{
+    if (node == NULL)
+        return;
+    // Caso 1: El nodo no tiene hijos
+    if (node->left == NULL && node->right == NULL)
+    {
+        if (node == tree->root)
+        {
+            tree->root = NULL;
+        }
+        else
+        {
+            if (node->parent->left == node)
+            {
+                node->parent->left = NULL;
+            }
+            else
+            {
+                node->parent->right = NULL;  
+            }
+            
+        }
+        free(node->pair);
+        
+    }
+    // Caso 2: El nodo tiene un hijo
+    else
+    {
+        if (node->left == NULL)
+        {
+            if (node == tree->root)
+            {
+                tree->root = node->right;
+                node->right->parent = NULL;
+            }
+            else
+            {
+                if (node->parent->left == node)
+                {
+                    node->parent->left = node->right;
+                    node->right->parent = node->parent;
+                }
+                else
+                {
+                    node->parent->right = node->right;
+                    node->right->parent = node->parent;
+                }
+            }
+            free(node->pair);
+        }
+        else
+        {
+            if (node->right == NULL)
+            {
+                if (node == tree->root)
+                {
+                    tree->root = node->left;
+                    node->left->parent = NULL;
+                }
+                else
+                {
+                    if (node->parent->left == node)
+                    {
+                        node->parent->left = node->left;
+                        node->left->parent = node->parent;
+                    }
+                    else
+                    {
+                        node->parent->right = node->left;
+                        node->left->parent = node->parent;
+                    }
+                }
+                free(node->pair);
+            }
+            else
+            {
+                // Caso 3: El nodo tiene dos hijos
+                TreeNode* successor = minimum(node->right);
+                node->pair->key = successor->pair->key;
+                node->pair->value = successor->pair->value;
+                removeNode(tree, successor);
+                
+            }
+            
+        }
+        
+    }
+    
 
 }
 
