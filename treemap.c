@@ -241,32 +241,24 @@ Pair * upperBound(TreeMap * tree, void* key)
     TreeNode* current = tree->root;
     TreeNode* upper = NULL;
 
-    while (current != NULL)
-        {
-            if (tree->lower_than(key,current->pair->key))
-            {
-                upper = current;
-                current = current->left;
-            }
-            else if (tree->lower_than(current->pair->key,key))
-            {
-                current = current->right;
-            }
-            else
-            {
-                current = current->right;
-            }
+    while (current != NULL) {
+        if (tree->lower_than(key, current->pair->key)) {
+            upper = current;
+            current = current->left;
+        } else if (tree->lower_than(current->pair->key, key)) {
+            current = current->right;
+        } else {
+            // Encontró una clave igual, se mueve hacia la derecha para encontrar el primer mayor
+            current = current->right;
         }
+    }
 
-    if (upper == NULL) 
-        return NULL;
-    else 
-    {
+    if (upper == NULL) {
+        return NULL; // No hay ningún nodo mayor o igual que la clave dada
+    } else {
         tree->current = upper;
         return upper->pair;
     }
-    
-    
 
 }
 
