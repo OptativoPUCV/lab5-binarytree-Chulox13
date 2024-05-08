@@ -392,3 +392,9 @@ treemap.c:241:12: error: ‘upperBound’ defined but not used [-Werror=unused-f
 cc1: all warnings being treated as errors
 Compilation failed
 880054e
+Wed 08 May 2024 09:36:05 PM UTC: 
+ treemap.c | 2 --
+ 1 file changed, 2 deletions(-)
+ tests:  25|1
+total_score: 60/70
+1bb36c1
